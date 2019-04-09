@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI.Desktop
+namespace Desktop
 {
     public partial class ApplicationForm : Form
     {
@@ -33,12 +33,12 @@ namespace UI.Desktop
 
         public virtual bool Validar() { return false; }
 
-        public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
+        public void Notificar (string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
             MessageBox.Show(titulo, mensaje, botones, icono);
         }
 
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
+        public void Notificar (string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
             this.Notificar(this.Text, mensaje, botones, icono);
         }

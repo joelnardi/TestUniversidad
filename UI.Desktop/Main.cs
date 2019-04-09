@@ -7,10 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Business.Entities;
-using Business.Logic;
 
-namespace UI.Desktop
+namespace Desktop
 {
     public partial class Main : Form
     {
@@ -19,22 +17,28 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
-        private void btnNuevoAlumno_Click(object sender, EventArgs e)
+        private void btnAlumnos_Click(object sender, EventArgs e)
         {
-            AlumnoDesktop formPlan = new AlumnoDesktop(ApplicationForm.ModoForm.Alta);
-            formPlan.ShowDialog();
+            Alumnos al = new Alumnos();
+            al.ShowDialog();
         }
 
-        private void btnEstadoAcademico_Click(object sender, EventArgs e)
+        private void btnInscripciones_Click(object sender, EventArgs e)
         {
-            EstadoAlumno formPlan = new EstadoAlumno();
-            formPlan.ShowDialog();
+            Inscripciones insc = new Inscripciones();
+            insc.ShowDialog();
         }
 
         private void btnEstadoCurso_Click(object sender, EventArgs e)
         {
-            EstadoCurso formPlan = new EstadoCurso();
-            formPlan.ShowDialog();
+            EstadoCurso estCurso = new EstadoCurso();
+            estCurso.ShowDialog();
+        }
+
+        private void btnEstadoAcademico_Click(object sender, EventArgs e)
+        {
+            EstadoAcademico estAcad = new EstadoAcademico();
+            estAcad.ShowDialog();
         }
     }
 }

@@ -7,56 +7,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Business.Entities;
 using Business.Logic;
+using Business.Entities;
 
-namespace UI.Desktop
+namespace Desktop
 {
     public partial class AlumnoDesktop : ApplicationForm
     {
-        private Alumno _alumnoActual;
-
         public Alumno AlumnoActual
         {
-            get { return _alumnoActual; }
-            set { _alumnoActual = value; }
+            get; set;
         }
 
-        public AlumnoDesktop(ModoForm md) : this()
+        public AlumnoDesktop() : base()
         {
-            this.Modo = md;
+            InitializeComponent();
         }
 
-        public AlumnoDesktop(int ID, ModoForm md) : this()
+        public AlumnoDesktop(ModoForm modo) : this()
         {
-            this.Modo = md;
-            AlumnoLogic alog = new AlumnoLogic();
-            AlumnoActual = alog.GetOne(ID);
+            this.Modo = modo;
+        }
+
+        public AlumnoDesktop(int ID, ModoForm modo) : this()
+        {
+            this.Modo = modo;
+            AlumnoLogic al = new AlumnoLogic();
+            AlumnoActual = al.GetOne(ID);
             MapearDeDatos();
         }
 
         public override void MapearDeDatos()
         {
-            this.txbID.Text = AlumnoActual.ID.ToString();
-            this.txbLegajo.Text = AlumnoActual.Legajo.ToString();
-            this.txbNombre.Text = AlumnoActual.Nombre.ToString();
-            
-            switch(this.Modo)
+            this.txtID.Text = AlumnoActual.ID.ToString();
+            this.txtLegajo.Text = AlumnoActual.Legajo.ToString();
+            this.txtNombre.Text = AlumnoActual.Nombre.ToString();
+            this.dtpFechaNacimiento.Value = AlumnoActual.FechaNacimiento;
+
+            switch (this.Modo)
             {
                 case ModoForm.Alta:
+                    txtID.ReadOnly = true;
                     btnAceptar.Text = "Guardar";
-                    this.txbID.Enabled = false;
                     break;
                 case ModoForm.Baja:
                     btnAceptar.Text = "Eliminar";
+                    txtLegajo.ReadOnly = true;
+                    txtNombre.ReadOnly = true;
                     break;
                 case ModoForm.Modificacion:
-                    btnAceptar.Text = "Modificar";
+                    btnAceptar.Text = "Guardar";
+                    txtID.ReadOnly = true;
                     break;
                 case ModoForm.Consulta:
                     btnAceptar.Text = "Aceptar";
-                    break;
-                default:
+                    txtID.ReadOnly = true;
+                    txtLegajo.ReadOnly = true;
+                    txtNombre.ReadOnly = true;
                     break;
             }
         }
@@ -69,11 +76,12 @@ namespace UI.Desktop
             }
             else
             {
-                AlumnoActual.ID = int.Parse(txbID.Text);
+                AlumnoActual.ID = int.Parse(txtID.Text);
             }
-            AlumnoActual.Legajo = int.Parse(txbLegajo.Text);
-            AlumnoActual.Nombre = txbNombre.Text;
-            AlumnoActual.FechaNacimiento = datFechaNacimiento.Value.Date;
+
+            AlumnoActual.Legajo = int.Parse(txtLegajo.Text);
+            AlumnoActual.Nombre = txtNombre.Text;
+            AlumnoActual.FechaNacimiento = dtpFechaNacimiento.Value;
 
             switch (this.Modo)
             {
@@ -94,18 +102,13 @@ namespace UI.Desktop
             }
         }
 
-        public AlumnoDesktop() : base()
-        {
-            InitializeComponent();
-        }
-
         public override void GuardarCambios()
         {
             MapearADatos();
-            AlumnoLogic alogi = new AlumnoLogic();
+            AlumnoLogic al = new AlumnoLogic();
             try
             {
-                alogi.Save(AlumnoActual);
+                al.Save(AlumnoActual);
             }
             catch (Exception exc)
             {
@@ -113,10 +116,23 @@ namespace UI.Desktop
             }
         }
 
+        public override bool Validar()
+        {
+            bool valido = false;
+            if (txtLegajo.Text!="" && txtNombre.Text!="")
+            {
+                valido = true;
+            }
+            return valido;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            this.GuardarCambios();
-            this.Close();
+            if (Validar())
+            {
+                this.GuardarCambios();
+                this.Close();
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
