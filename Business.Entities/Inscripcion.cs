@@ -35,5 +35,17 @@ namespace Business.Entities
             get { return estadoInsc; }
             set { estadoInsc = value; }
         }
+
+        public string cursoStr;
+        public string CursoStr
+        {
+            get { return curso.Asignatura; }
+        }
+
+        public string alumnoStr;
+        public string AlumnoStr
+        {
+            get { return alumno.Nombre; }
+        }
     }
 }

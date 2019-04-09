@@ -33,7 +33,7 @@ namespace Business.Entities
         public int Edad
         {
             get { return edad; }
-            set { edad = DateTime.Today.AddTicks(-fechaNacimiento.Ticks).Year - 1; }
+            set { edad = value; }
         }  
     }
 }
