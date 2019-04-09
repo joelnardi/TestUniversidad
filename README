@@ -1,0 +1,11 @@
+Versión para evaluación de TECSO.
+
+DatabaseScript.sql es un archivo de script a ejecutar previo al uso del ejecutable del programa. 
+La base de datos es local y no hay controles de seguridad.
+
+TestTECSO.rar contiene un instalable.
+
+Como versión preliminar no hay controles programados, es una versión super light. 
+Requiere mejoras pero para evaluación del código es bueno.
+
+La capa web no ha sido programada. A futuro se contempla en caso de requerir evaluación de dicha capa.
