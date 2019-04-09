@@ -32,6 +32,30 @@ namespace Business.Logic
             }
         }
 
+        public List<Inscripcion> GetAll()
+        {
+            try
+            {
+                return InscripcionData.GetAll();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
+
+        public Inscripcion GetOne(int ID)
+        {
+            try
+            {
+                return InscripcionData.GetOne(ID);
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
+
         public List<Inscripcion> GetAllCursos(int IDCu)
         {
             try
@@ -44,11 +68,11 @@ namespace Business.Logic
             }
         }
 
-        public void Delete(int IDAl, int IDCu)
+        public void Delete(int ID)
         {
             try
             {
-                InscripcionData.Delete(IDAl, IDCu);
+                InscripcionData.Delete(ID);
             }
             catch (Exception exc)
             {
