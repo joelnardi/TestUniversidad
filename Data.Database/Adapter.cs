@@ -23,9 +23,9 @@ namespace Data.Database
 
         protected void OpenConnection()
         {
-            string config = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
+            //string config = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
 
-            SqlConn = new SqlConnection(config);
+            SqlConn = new SqlConnection("Data Source=JOEL-DESKTOP\\SQLEXPRESS;Initial Catalog=Universidad;Integrated Security=True");
             SqlConn.Open();
         }
 

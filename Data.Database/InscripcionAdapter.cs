@@ -13,15 +13,15 @@ namespace Data.Database
     {
         public List<Inscripcion> GetAllAlumnos(int IDAl)
         {
-            List<Inscripcion> inscriciones = new List<Inscripcion>();
+            List<Inscripcion> inscripciones = new List<Inscripcion>();
 
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdInscripciones = new SqlCommand("SELECT * FROM Inscripciones" +
-                    "INNER JOIN Cursos ON Cursos.IDCurso = Inscripciones.IDCurso" +
-                    "INNER JOIN Alumnos ON Alumnos.IDAlumno = Inscripciones.IDAlumno" +
-                    "WHERE Alumnos.IDAlumno = @idal", SqlConn);
+                SqlCommand cmdInscripciones = new SqlCommand("select * from Inscripciones " +
+                    "inner join Cursos on Cursos.IDCurso = Inscripciones.IDCurso " +
+                    "inner join Alumnos on Alumnos.IDAlumno = Inscripciones.IDAlumno " +
+                    "where Alumnos.IDAlumno = @idal", SqlConn);
                 cmdInscripciones.Parameters.Add("@idal", SqlDbType.Int).Value = IDAl;
                 SqlDataReader drInscripciones = cmdInscripciones.ExecuteReader();
                 while (drInscripciones.Read())
@@ -40,9 +40,10 @@ namespace Data.Database
                     cu.Docente = (string)drInscripciones["Docente"];
                     ic.EstadoInsc = (string)drInscripciones["Estado"];
                     ic.FechaInscripcion = (DateTime)drInscripciones["FechaInscripcion"];
+                    ic.ID = (int)drInscripciones["IDInsc"];
                     ic.Curso = cu;
                     ic.Alumno = al;
-                    inscriciones.Add(ic);
+                    inscripciones.Add(ic);
                 }
                 drInscripciones.Close();
             }
@@ -56,20 +57,112 @@ namespace Data.Database
                 this.CloseConnection();
             }
 
-            return inscriciones;
+            return inscripciones;
         }
 
-        public List<Inscripcion> GetAllCursos(int IDCu)
+        public List<Inscripcion> GetAll()
         {
-            List<Inscripcion> inscriciones = new List<Inscripcion>();
+            List<Inscripcion> inscripciones = new List<Inscripcion>();
 
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdInscripciones = new SqlCommand("SELECT * FROM Inscripciones" +
-                    "INNER JOIN Cursos ON Cursos.IDCurso = Inscripciones.IDCurso" +
-                    "INNER JOIN Alumnos ON Alumnos.IDAlumno = Inscripciones.IDAlumno" +
-                    "WHERE Alumnos.IDCurso = @idcu", SqlConn);
+                SqlCommand cmdInscripciones = new SqlCommand("select * from Inscripciones " +
+                    "inner join Cursos on Cursos.IDCurso = Inscripciones.IDCurso " +
+                    "inner join Alumnos on Alumnos.IDAlumno = Inscripciones.IDAlumno", SqlConn);
+                SqlDataReader drInscripciones = cmdInscripciones.ExecuteReader();
+                while (drInscripciones.Read())
+                {
+                    Alumno al = new Alumno();
+                    Curso cu = new Curso();
+                    Inscripcion ic = new Inscripcion();
+                    al.ID = (int)drInscripciones["IDAlumno"];
+                    al.Nombre = (string)drInscripciones["Nombre"];
+                    al.Legajo = (int)drInscripciones["Legajo"];
+                    al.FechaNacimiento = (DateTime)drInscripciones["FechaNacimiento"];
+                    al.Edad = (int)drInscripciones["Edad"];
+                    cu.ID = (int)drInscripciones["IDCurso"];
+                    cu.Asignatura = (string)drInscripciones["Asignatura"];
+                    cu.CupoMaximo = (int)drInscripciones["CupoMaximo"];
+                    cu.Docente = (string)drInscripciones["Docente"];
+                    ic.EstadoInsc = (string)drInscripciones["Estado"];
+                    ic.FechaInscripcion = (DateTime)drInscripciones["FechaInscripcion"];
+                    ic.ID = (int)drInscripciones["IDInsc"];
+                    ic.Curso = cu;
+                    ic.Alumno = al;
+                    inscripciones.Add(ic);
+                }
+                drInscripciones.Close();
+            }
+            catch (Exception exc)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar inscripciones", exc);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return inscripciones;
+        }
+
+        public Inscripcion GetOne(int ID)
+        {
+            Inscripcion ic = new Inscripcion();
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdInscripciones = new SqlCommand("select * from Inscripciones " +
+                    "inner join Cursos on Cursos.IDCurso = Inscripciones.IDCurso " +
+                    "inner join Alumnos on Alumnos.IDAlumno = Inscripciones.IDAlumno " +
+                    "where IDInsc = @id", SqlConn);
+                cmdInscripciones.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlDataReader drInscripciones = cmdInscripciones.ExecuteReader();
+                if (drInscripciones.Read())
+                {
+                    Alumno al = new Alumno();
+                    Curso cu = new Curso();
+                    al.ID = (int)drInscripciones["IDAlumno"];
+                    al.Nombre = (string)drInscripciones["Nombre"];
+                    al.Legajo = (int)drInscripciones["Legajo"];
+                    al.FechaNacimiento = (DateTime)drInscripciones["FechaNacimiento"];
+                    al.Edad = (int)drInscripciones["Edad"];
+                    cu.ID = (int)drInscripciones["IDCurso"];
+                    cu.Asignatura = (string)drInscripciones["Asignatura"];
+                    cu.CupoMaximo = (int)drInscripciones["CupoMaximo"];
+                    cu.Docente = (string)drInscripciones["Docente"];
+                    ic.EstadoInsc = (string)drInscripciones["Estado"];
+                    ic.FechaInscripcion = (DateTime)drInscripciones["FechaInscripcion"];
+                    ic.ID = (int)drInscripciones["IDInsc"];
+                    ic.Curso = cu;
+                    ic.Alumno = al;
+                }
+                drInscripciones.Close();
+            }
+            catch (Exception exc)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar inscripciones", exc);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+            return ic;
+        }
+
+        public List<Inscripcion> GetAllCursos(int IDCu)
+        {
+            List<Inscripcion> inscripciones = new List<Inscripcion>();
+
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdInscripciones = new SqlCommand("select * from Inscripciones " +
+                    "inner join Cursos on Cursos.IDCurso = Inscripciones.IDCurso " +
+                    "inner join Alumnos on Alumnos.IDAlumno = Inscripciones.IDAlumno " +
+                    "where Cursos.IDCurso = @idcu", SqlConn);
                 cmdInscripciones.Parameters.Add("@idcu", SqlDbType.Int).Value = IDCu;
                 SqlDataReader drInscripciones = cmdInscripciones.ExecuteReader();
                 while (drInscripciones.Read())
@@ -88,9 +181,10 @@ namespace Data.Database
                     cu.Docente = (string)drInscripciones["Docente"];
                     ic.EstadoInsc = (string)drInscripciones["Estado"];
                     ic.FechaInscripcion = (DateTime)drInscripciones["FechaInscripcion"];
+                    ic.ID = (int)drInscripciones["IDInsc"];
                     ic.Curso = cu;
                     ic.Alumno = al;
-                    inscriciones.Add(ic);
+                    inscripciones.Add(ic);
                 }
                 drInscripciones.Close();
             }
@@ -104,17 +198,16 @@ namespace Data.Database
                 this.CloseConnection();
             }
 
-            return inscriciones;
+            return inscripciones;
         }
 
-        public void Delete(int IDAl, int IDCu)
+        public void Delete(int ID)
         {
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("DELETE Inscripciones WHERE IDAlumno=@idal AND IDCurso=@idcu", SqlConn);
-                cmdDelete.Parameters.Add("@idal", SqlDbType.Int).Value = IDAl;
-                cmdDelete.Parameters.Add("@idcu", SqlDbType.Int).Value = IDCu;
+                SqlCommand cmdDelete = new SqlCommand("DELETE Inscripciones WHERE IDinsc=@id", SqlConn);
+                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = ID;
                 cmdDelete.ExecuteNonQuery();
             }
             catch (Exception exc)
@@ -133,7 +226,7 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdInsert = new SqlCommand("INSERT Inscripciones (IDAlumno, IDCurso, FechaInscripcion, Estado)" +
+                SqlCommand cmdInsert = new SqlCommand("INSERT Inscripciones (IDAlumno, IDCurso, FechaInscripcion, Estado) " +
                     "values (@idal, @idcu, @fechainscripcion, @estado", SqlConn);
                 cmdInsert.Parameters.Add("@idal", SqlDbType.Int).Value = ic.Alumno.ID;
                 cmdInsert.Parameters.Add("@idcu", SqlDbType.Int).Value = ic.Curso.ID;
@@ -193,7 +286,7 @@ namespace Data.Database
             {
                 try
                 {
-                    this.Delete(inscripcion.Alumno.ID, inscripcion.Alumno.ID);
+                    this.Delete(inscripcion.ID);
                 }
                 catch (Exception exc)
                 {

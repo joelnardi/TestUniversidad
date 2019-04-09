@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Business.Entities;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Data.Database
 {
@@ -103,12 +104,13 @@ namespace Data.Database
             {
                 this.OpenConnection();
                 SqlCommand cmdInsert = new SqlCommand("INSERT Alumnos (Nombre, Legajo, Edad, FechaNacimiento)" +
-                    "values (@nombre, @legajo, @edad, @fechanacimiento", SqlConn);
+                    "values (@nombre, @legajo, @edad, @fechanacimiento)", SqlConn);
                 cmdInsert.Parameters.Add("@nombre", SqlDbType.VarChar, 30).Value = al.Nombre;
                 cmdInsert.Parameters.Add("@legajo", SqlDbType.Int).Value = al.Legajo;
-                cmdInsert.Parameters.Add("@edad", SqlDbType.Int).Value = al.Edad;
                 cmdInsert.Parameters.Add("@fechanacimiento", SqlDbType.Date).Value = al.FechaNacimiento;
-                al.ID = Decimal.ToInt32((decimal)cmdInsert.ExecuteScalar());
+                al.Edad = DateTime.Today.AddTicks(-al.FechaNacimiento.Ticks).Year - 1;
+                cmdInsert.Parameters.Add("@edad", SqlDbType.Int).Value = al.Edad;
+                cmdInsert.ExecuteNonQuery();
             }
             catch (Exception exc)
             {

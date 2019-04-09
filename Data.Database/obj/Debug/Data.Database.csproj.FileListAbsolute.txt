@@ -1,3 +1,4 @@
+C:\Users\Joel\source\repos\ITChallenge\Data.Database\bin\Debug\Data.Database.dll.config
 C:\Users\Joel\source\repos\ITChallenge\Data.Database\bin\Debug\Data.Database.dll
 C:\Users\Joel\source\repos\ITChallenge\Data.Database\bin\Debug\Data.Database.pdb
 C:\Users\Joel\source\repos\ITChallenge\Data.Database\bin\Debug\Business.Entities.dll
@@ -7,4 +8,3 @@ C:\Users\Joel\source\repos\ITChallenge\Data.Database\obj\Debug\Data.Database.csp
 C:\Users\Joel\source\repos\ITChallenge\Data.Database\obj\Debug\Data.Database.csproj.CopyComplete
 C:\Users\Joel\source\repos\ITChallenge\Data.Database\obj\Debug\Data.Database.dll
 C:\Users\Joel\source\repos\ITChallenge\Data.Database\obj\Debug\Data.Database.pdb
-C:\Users\Joel\source\repos\ITChallenge\Data.Database\bin\Debug\Data.Database.dll.config
