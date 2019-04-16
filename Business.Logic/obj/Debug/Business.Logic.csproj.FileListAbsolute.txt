@@ -1,0 +1,12 @@
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Business.Logic.dll
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Business.Logic.pdb
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Business.Entities.dll
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Data.Database.dll
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Business.Entities.pdb
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Data.Database.pdb
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\bin\Debug\Data.Database.dll.config
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\obj\Debug\Business.Logic.csprojAssemblyReference.cache
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\obj\Debug\Business.Logic.csproj.CoreCompileInputs.cache
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\obj\Debug\Business.Logic.csproj.CopyComplete
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\obj\Debug\Business.Logic.dll
+C:\Users\Joel\source\repos\ITChallenge\Business.Logic\obj\Debug\Business.Logic.pdb
