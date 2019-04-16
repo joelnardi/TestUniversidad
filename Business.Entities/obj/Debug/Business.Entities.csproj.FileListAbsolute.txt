@@ -1,5 +1,0 @@
-C:\Users\Joel\source\repos\ITChallenge\Business.Entities\bin\Debug\Business.Entities.dll
-C:\Users\Joel\source\repos\ITChallenge\Business.Entities\bin\Debug\Business.Entities.pdb
-C:\Users\Joel\source\repos\ITChallenge\Business.Entities\obj\Debug\Business.Entities.csproj.CoreCompileInputs.cache
-C:\Users\Joel\source\repos\ITChallenge\Business.Entities\obj\Debug\Business.Entities.dll
-C:\Users\Joel\source\repos\ITChallenge\Business.Entities\obj\Debug\Business.Entities.pdb

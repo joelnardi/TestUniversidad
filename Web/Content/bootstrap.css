@@ -11,10 +11,7 @@ html {
 }
 body {
   margin: 0;
-<<<<<<< HEAD
   background-color:  #ff6645;
-=======
->>>>>>> parent of 34a34cb... Eliminado viejo folder de Web
 }
 article,
 aside,
@@ -117,12 +114,7 @@ input,
 optgroup,
 select,
 textarea {
-<<<<<<< HEAD
   margin: 0 0 0 0px;
-=======
-  margin: 0;
-  font: inherit;
->>>>>>> parent of 34a34cb... Eliminado viejo folder de Web
   color: inherit;
 }
 button {
@@ -1625,13 +1617,10 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
-<<<<<<< HEAD
     top: 0px;
     left: 0px;
     height: 93px;
     width: 801px;
-=======
->>>>>>> parent of 34a34cb... Eliminado viejo folder de Web
 }
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: left;
@@ -4640,13 +4629,10 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .navbar-inverse .navbar-toggle {
   border-color: #333;
-<<<<<<< HEAD
     top: 0px;
     left: 0px;
     height: 33px;
     width: 46px;
-=======
->>>>>>> parent of 34a34cb... Eliminado viejo folder de Web
 }
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
