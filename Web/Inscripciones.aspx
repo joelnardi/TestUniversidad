@@ -2,50 +2,45 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="jumbotron">
         <h1>Gestión de Inscripciones</h1>    
-        <div class="inscripcionDesktop">
-
-            <asp:Label ID="lblID" runat="server" Text="ID"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="txtID" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblAlumno" runat="server" Text="Alumno"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlAlumno" runat="server" DataSourceID="odsAlumnos" DataTextField="Nombre" DataValueField="ID">
-            </asp:DropDownList>
-            <asp:ObjectDataSource ID="odsAlumnos" runat="server" SelectMethod="GetAll" TypeName="Business.Logic.AlumnoLogic"></asp:ObjectDataSource>
-            <br />
-            <asp:Label ID="lblCurso" runat="server" Text="Curso"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlCurso" runat="server" DataSourceID="odsCursos" DataTextField="Asignatura" DataValueField="ID">
-            </asp:DropDownList>
-            <asp:ObjectDataSource ID="odsCursos" runat="server" SelectMethod="GetAll" TypeName="Business.Logic.CursoLogic"></asp:ObjectDataSource>
-            <br />
-            <asp:Label ID="lblEstado" runat="server" Text="Estado"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlEstado" runat="server">
-                <asp:ListItem>1-Inscripto</asp:ListItem>
-                <asp:ListItem>2-Regular</asp:ListItem>
-                <asp:ListItem>3-No Regularizo</asp:ListItem>
-            </asp:DropDownList>
-            <br />
-            <asp:Label ID="Label1" runat="server" Text="Fecha de Inscripción"></asp:Label>
-            <asp:Calendar ID="calFechaInscripcion" runat="server"></asp:Calendar>
-            <br />
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
-
-        </div>
         <div class="inscripciones">
 
             <br />
 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="odsInscripciones" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="dgvInscripciones" runat="server" AutoGenerateColumns="False" 
+                CellPadding="4" DataSourceID="odsInscripciones" ForeColor="#333333" DataKeyNames="ID"
+                GridLines="None" OnSelectedIndexChanged="dgvInscripciones_SelectedIndexChanged">
                 <Columns>
-                    <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" />
-                    <asp:BoundField DataField="AlumnoStr" HeaderText="AlumnoStr" ReadOnly="True" SortExpression="AlumnoStr" />
-                    <asp:BoundField DataField="CursoStr" HeaderText="CursoStr" ReadOnly="True" SortExpression="CursoStr" />
-                    <asp:BoundField DataField="FechaInscripcion" HeaderText="FechaInscripcion" SortExpression="FechaInscripcion" />
-                    <asp:BoundField DataField="EstadoInsc" HeaderText="EstadoInsc" SortExpression="EstadoInsc" />
-                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
+                    <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" >
+                    <ControlStyle Width="50px" />
+                    <FooterStyle Width="50px" />
+                    <HeaderStyle Width="50px" />
+                    <ItemStyle Width="50px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="AlumnoStr" HeaderText="Alumnos" ReadOnly="True" SortExpression="AlumnoStr" >
+                    <ControlStyle Width="200px" />
+                    <FooterStyle Width="200px" />
+                    <HeaderStyle Width="200px" />
+                    <ItemStyle Width="200px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="CursoStr" HeaderText="CursoStr" ReadOnly="True" SortExpression="CursoStr" >
+                    <ControlStyle Width="250px" />
+                    <FooterStyle Width="250px" />
+                    <HeaderStyle Width="250px" />
+                    <ItemStyle Width="250px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="FechaInscripcion" HeaderText="Fecha de Inscripción" SortExpression="FechaInscripcion" >
+                    <ControlStyle Width="200px" />
+                    <FooterStyle Width="200px" />
+                    <HeaderStyle Width="200px" />
+                    <ItemStyle Width="200px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="EstadoInsc" HeaderText="Estado Insc" SortExpression="EstadoInsc" >
+                    <ControlStyle Width="150px" />
+                    <FooterStyle Width="150px" />
+                    <HeaderStyle Width="150px" />
+                    <ItemStyle Width="150px" />
+                    </asp:BoundField>
+                    <asp:CommandField ShowSelectButton="True" />
                 </Columns>
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -64,6 +59,49 @@
                 </DeleteParameters>
             </asp:ObjectDataSource>
 
+            <asp:Panel ID="gridActionsPanel" runat="server">
+                <asp:Button ID="btnNuevo" runat="server" BackColor="#66FFCC" OnClick="btnNuevo_Click" Text="Nuevo" />
+                <asp:Button ID="btnEditar" runat="server" Text="Editar" BackColor="#FFFFCC" OnClick="btnEditar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" BackColor="#FF9999" OnClick="btnEliminar_Click" Text="Eliminar" />
+            </asp:Panel>
+
         </div>
+
+        <div class="alumnosDesktop">
+                    <br />
+                    <asp:Panel ID="formPanel" runat="server" BackColor="#FFCC99" BorderColor="Black" BorderStyle="Solid" BorderWidth="2px">
+                    <asp:Label ID="lblTitulo" runat="server" Text="Inscripcion" Font-Bold="False" Font-Overline="True" Font-Size="Larger" Font-Underline="True"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblID0" runat="server" Text="ID" Font-Bold="True"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="txtID" runat="server"></asp:TextBox>
+                    <br />
+                        <asp:Label ID="lblAlumno" runat="server" Font-Bold="True" Text="Alumno"></asp:Label>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:DropDownList ID="ddlAlumno" runat="server" DataSourceID="odsAlumnos" DataTextField="Nombre" DataValueField="ID">
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="odsAlumnos" runat="server" SelectMethod="GetAll" TypeName="Business.Logic.AlumnoLogic"></asp:ObjectDataSource>
+                    <br />
+                        <asp:Label ID="lblCurso" runat="server" Font-Bold="True" Text="Curso"></asp:Label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<asp:DropDownList ID="ddlCurso" runat="server" DataSourceID="odsCursos" DataTextField="Asignatura" DataValueField="ID">
+                        </asp:DropDownList>
+                        &nbsp;<asp:ObjectDataSource ID="odsCursos" runat="server" SelectMethod="GetAll" TypeName="Business.Logic.CursoLogic"></asp:ObjectDataSource>
+                    <br />
+                        <asp:Label ID="lblEstado" runat="server" Font-Bold="True" Text="Estado"></asp:Label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:DropDownList ID="ddlEstado" runat="server">
+                            <asp:ListItem>1-Inscripto</asp:ListItem>
+                            <asp:ListItem>2-Regular</asp:ListItem>
+                            <asp:ListItem>3-No Regularizo</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        <br />
+                    <asp:Label ID="lblFechaInscripcion" runat="server" Text="Fecha de Inscripcion" Font-Bold="True"></asp:Label>
+                    <asp:Calendar ID="cldFechaInscripcion" runat="server"></asp:Calendar>
+                        <br />
+                    <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </asp:Panel>  
+                </div>
+
     </div>
 </asp:Content>

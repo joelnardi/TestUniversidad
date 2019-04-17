@@ -2,31 +2,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="jumbotron">
         <h1>Gestión de Alumnos</h1>       
-        <div class="alumnosDesktop">
-
-            <asp:Label ID="lblID" runat="server" Text="ID"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="txtID" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblLegajo" runat="server" Text="Legajo"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="txtLegajo" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de Nacimiento"></asp:Label>
-            <asp:Calendar ID="cldFechaNacimiento" runat="server"></asp:Calendar>
-            <br />
-            <asp:Button ID="btnGuardar" runat="server" Text="Button" />
-
-        </div>
         <div class="alumnos">
 
             <br />
 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="odsAlumnos" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="dgvAlumnos" runat="server" AutoGenerateColumns="False" 
+                CellPadding="4" DataSourceID="odsAlumnos" ForeColor="#333333" DataKeyNames="ID"
+                GridLines="None" OnSelectedIndexChanged="dgvAlumnos_SelectedIndexChanged">
                 <Columns>
                     <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID">
                     <ControlStyle Width="50px" />
@@ -58,7 +40,7 @@
                     <HeaderStyle Width="50px" />
                     <ItemStyle Width="50px" />
                     </asp:BoundField>
-                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
+                    <asp:CommandField ShowSelectButton="True" />
                 </Columns>
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -77,6 +59,35 @@
                 </DeleteParameters>
             </asp:ObjectDataSource>
 
+            <asp:Panel ID="gridActionsPanel" runat="server">
+                <asp:Button ID="btnNuevo" runat="server" BackColor="#66FFCC" OnClick="btnNuevo_Click" Text="Nuevo" />
+                <asp:Button ID="btnEditar" runat="server" Text="Editar" BackColor="#FFFFCC" OnClick="btnEditar_Click" />
+                <asp:Button ID="btnEliminar" runat="server" BackColor="#FF9999" OnClick="btnEliminar_Click" Text="Eliminar" />
+            </asp:Panel>
         </div>
+        <div class="alumnosDesktop">
+                    <br />
+                    <asp:Panel ID="formPanel" runat="server" BackColor="#FFCC99" BorderColor="Black" BorderStyle="Solid" BorderWidth="2px">
+                    <asp:Label ID="lblTitulo" runat="server" Text="Alumno" Font-Bold="False" Font-Overline="True" Font-Size="Larger" Font-Underline="True"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblID" runat="server" Text="ID" Font-Bold="True"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="txtID" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre" Font-Bold="True"></asp:Label>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:Label ID="lblLegajo" runat="server" Text="Legajo" Font-Bold="True"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="txtLegajo" runat="server"></asp:TextBox>
+                    <br />
+                        <br />
+                    <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de Nacimiento" Font-Bold="True"></asp:Label>
+                    <asp:Calendar ID="cldFechaNacimiento" runat="server"></asp:Calendar>
+                        <br />
+                    <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
+                    <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    </asp:Panel>  
+                </div>
     </div>
 </asp:Content>
